@@ -13,4 +13,11 @@ RSpec.describe Cell do
         expect(cell.coordinate).to eq("B4")
     end
 
+    it "can contain a ship" do
+        cell = Cell.new("B4")
+        ship = Ship.new("Cruiser", 3)
+        expect(cell.ship).to be_nil
+        expect(cell.empty?).to be(true)
+    end
+
 end

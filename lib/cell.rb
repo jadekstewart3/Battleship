@@ -6,5 +6,7 @@ class Cell
         @ship = ship
     end
 
-
+    def empty?
+        !@ship 
+    end
 end
