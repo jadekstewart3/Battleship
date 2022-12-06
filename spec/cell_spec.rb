@@ -28,4 +28,15 @@ RSpec.describe Cell do
         expect(cell.empty?).to be(false)
     end
 
+    it "can take damage" do 
+        cell = Cell.new("B4")
+        ship = Ship.new("Cruiser", 3)
+        cell.place_ship(ship)
+        # require 'pry'; binding.pry
+        expect(cell.fired_upon?).to eq(false)
+        cell.fire_upon
+        expect(cell.ship.health).to eq(2)
+        expect(cell.fired_upon?).to eq(true)
+    end
+
 end
