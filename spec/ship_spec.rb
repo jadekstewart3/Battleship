@@ -3,7 +3,6 @@ require './lib/ship'
 
 RSpec.describe Ship do 
     it "it exists" do 
-
         ship = Ship.new("Cruiser", 3)
         expect(ship).to be_an_instance_of(Ship)
     end
@@ -14,7 +13,6 @@ RSpec.describe Ship do
     end
     
     it "has not sunk by default" do 
-
         ship = Ship.new("Cruiser", 3)
         expect(ship.sunk?).to eq(false)
     end
@@ -25,5 +23,16 @@ RSpec.describe Ship do
         expect(ship.health).to eq(2)
         ship.hit
         expect(ship.health).to eq(1)
+    end
+
+    it "can sink" do 
+        ship = Ship.new("Cruiser", 3)
+        ship.hit
+        expect(ship.health).to eq(2)
+        ship.hit
+        expect(ship.health).to eq(1)
+        ship.hit
+        expect(ship.health).to eq(0)
+        expect(ship.sunk?).to eq(true)
     end
 end
