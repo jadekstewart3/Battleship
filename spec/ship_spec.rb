@@ -23,5 +23,7 @@ RSpec.describe Ship do
         ship = Ship.new("Cruiser", 3)
         ship.hit
         expect(ship.health).to eq(2)
+        ship.hit
+        expect(ship.health).to eq(1)
     end
 end
