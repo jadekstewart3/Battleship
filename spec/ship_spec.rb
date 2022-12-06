@@ -13,4 +13,5 @@ RSpec.describe Ship do
         expect(ship.health).to eq(3)
     end
     
+    
 end
