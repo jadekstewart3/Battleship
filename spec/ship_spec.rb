@@ -7,4 +7,10 @@ RSpec.describe Ship do
         ship = Ship.new("Cruiser", 3)
         expect(ship).to be_an_instance_of(Ship)
     end
+
+    it "has health" do
+        ship = Ship.new("Cruiser", 3)
+        expect(ship.health).to eq(3)
+    end
+    
 end
