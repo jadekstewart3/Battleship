@@ -17,10 +17,17 @@ RSpec.describe Board do
     end
 
     it "confirms valid coordinates" do
-        expect(board.valid_coordinate?("A1")).to eq(true)
-        expect(board.valid_coordinate?("D4")).to eq(true)
-        expect(board.valid_coordinate?("A5")).to eq(false)
-        expect(board.valid_coordinate?("E1")).to eq(false)
-        expect(board.valid_coordinate?("A22")).to eq(false)
+        expect(@board.valid_coordinate?("A1")).to eq(true)
+        expect(@board.valid_coordinate?("D4")).to eq(true)
+        expect(@board.valid_coordinate?("A5")).to eq(false)
+        expect(@board.valid_coordinate?("E1")).to eq(false)
+        expect(@board.valid_coordinate?("A22")).to eq(false)
+    end
+
+    it "coordinates are same length as ship" do 
+        cruiser = Ship.new("Cruiser", 3)
+        submarine = Ship.new("Submarine", 2)
+        expect(board.valid_placement?(cruiser, ["A1", "A2"])).to be(false)
+        expect( board.valid_placement?(submarine, ["A2", "A3", "A4"])).to be(false)
     end
 end
