@@ -39,4 +39,24 @@ RSpec.describe Cell do
         expect(cell.fired_upon?).to eq(true)
     end
 
+    it "can render a miss and a blank" do
+        cell1 = Cell.new("B4")
+        cell2 = Cell.new("C3")
+        ship = Ship.new("Cruiser", 3)
+        # require "pry"; binding.pry
+
+        expect(cell1.render).to eq(".")
+        cell1.fire_upon
+        expect(cell1.render).to eq("M")
+    end
+        
+    it "can render a hit" do
+        cell1 = Cell.new("B4")
+        cell2 = Cell.new("C3")
+        ship = Ship.new("Cruiser", 3)
+
+        cell2.place_ship(ship)
+        expect(cell2.render).to eq(".")
+        expect(cell2.render(true)).to eq("S")
+    end
 end
