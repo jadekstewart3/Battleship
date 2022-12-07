@@ -1,3 +1,5 @@
+require './lib/ship'
+require './lib/cell'
 require './lib/board'
 
 RSpec.describe Board do 
@@ -10,7 +12,7 @@ RSpec.describe Board do
     end
 
     it "has cells" do 
-        expect(@board).to be_a(Hash)
-        expect(board.length).to eq(16)
+        expect(@board.cells).to be_a(Hash)
+        expect(@board.cells.length).to eq(16)
     end
 end
