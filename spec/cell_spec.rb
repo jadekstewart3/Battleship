@@ -45,7 +45,6 @@ RSpec.describe Cell do
         ship = Ship.new("Cruiser", 3)
         # require "pry"; binding.pry
 
-
         expect(cell1.render).to eq(".")
         cell1.fire_upon
         expect(cell1.render).to eq("M")
