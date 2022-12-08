@@ -23,26 +23,27 @@ class Board
 
     def valid_coordinate?(coordinate)
         @cells.keys.include?(coordinate)
-    endZ
+    end
 
     def valid_placement?(ship, spots)
         # if ship.length == spot.length && spot.all? { |spot| valid_coordinate}
         # I have to confirm if they're giving valid coordinates!
-
-        if ship.length == spots.length && spots.all? { |spot| valid_coordinate? }
+        x = ship.length
+        if x == spots.length && spots.all? { |spot| valid_coordinate?(spot) }
         #If the ship length equals the total spots listed
             letters = spots.map do |spot| #Split the spots into
-                spot.split('').first #letters
+                spot.split('').first.ord #letters
             end
             
             numbers = spots.map do |spot|
-                spot.split('').last # And numbers
+                spot.split('').last.to_i # And numbers
             end
 
             if letters.uniq.count == 1 # if all the letters are the same
-                numbers.each_cons(ship.length).all? # are the numbers concecutive?
+                # require "pry"; binding.pry
+                numbers.each_cons(x).all? {|num1, num2, num3| num1 + 1 == num2 && num2 +1 == num3}# are the numbers concecutive?
             elsif numbers.uniq.count == 1 # if all the letters are the same
-                letters.ord.each_cons(ship.length).all? # are the letters (converted with .ord) concecutive?
+                letters.each_cons(x).all? {|letter1, letter2| letter2 - letter1 == letter1 }# are the letters (converted with .ord) concecutive?
             else
                 false
             end
