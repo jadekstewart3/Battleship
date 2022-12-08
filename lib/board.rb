@@ -26,11 +26,13 @@ class Board
     end
 
     def valid_placement?(ship, spots)
-        # if ship.length == spot.length && spot.all? { |spot| valid_coordinate}
-        # I have to confirm if they're giving valid coordinates!
         x = ship.length
+        #first confirm that the number of spots == length of the ship
+        #then confirm that each spot given is a valid_coorinate
+        #we must itterate through each spot, and we want it to return false
+        #if it's not on the board.
+        
         if x == spots.length && spots.all? { |spot| valid_coordinate?(spot) }
-        #If the ship length equals the total spots listed
             letters = spots.map do |spot| #Split the spots into
                 spot.split('').first.ord #letters
             end
@@ -40,10 +42,10 @@ class Board
             end
 
             if letters.uniq.count == 1 # if all the letters are the same
-                # require "pry"; binding.pry
                 numbers.each_cons(x).all? {|num1, num2, num3| num1 + 1 == num2 && num2 +1 == num3}# are the numbers concecutive?
             elsif numbers.uniq.count == 1 # if all the letters are the same
-                letters.each_cons(x).all? {|letter1, letter2| letter2 - letter1 == letter1 }# are the letters (converted with .ord) concecutive?
+                letters.each_cons(x).all? {|letter1, letter2, letter3| letter1 + 1 == letter2 && letter2 +1 == letter3 }# are the letters (converted with .ord) concecutive?
+                # JADE - I never modified line 47 to match the logic of line 45. Now that I have, it runs with a passing test :)
             else
                 false
             end
