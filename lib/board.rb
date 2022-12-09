@@ -54,4 +54,8 @@ class Board
             return false
         end
     end
+
+    def place_ship
+        
+    end
 end
