@@ -49,9 +49,15 @@ class Board
         end
     end
 
+    def empty_cells?(coordinates)
+        coordinates.all? do |coordinate|
+            @cells[coordinate].empty?
+        end
+    end
+
     def valid_placement?(ship, coordinates)
         coordinates.sort!
-        if valid_length?(ship, coordinates) && consecutive_coordinates?(coordinates)  
+        if valid_length?(ship, coordinates) && consecutive_coordinates?(coordinates) && empty_cells?(coordinates)
             true
         else
             false
@@ -60,6 +66,7 @@ class Board
 
     def place(ship, coordinates)
         if coordinates.map { |coordinate| valid_coordinate?(coordinate) && valid_placement?(ship, coordinates)}
+        # require "pry"; binding.pry
             coordinates.map do |coordinate|
                 @cells[coordinate].place_ship(ship)
             end
