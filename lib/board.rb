@@ -33,8 +33,8 @@ class Board
 
     def consecutive_coordinates?(coordinates)
         letters = coordinates.map do |coordinate| 
-                coordinate.split('').first.ord 
-            end
+            coordinate.split('').first.ord 
+        end
             
         numbers = coordinates.map do |coordinate|
             coordinate.split('').last.to_i 
