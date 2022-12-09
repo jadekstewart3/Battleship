@@ -31,13 +31,13 @@ class Board
         x == coordinates.length && coordinates.all? { |coordinate| valid_coordinate?(coordinate) }
     end
 
-    def consecutive_coordinates?(spots)
-        letters = spots.map do |spot| 
-                spot.split('').first.ord 
+    def consecutive_coordinates?(coordinates)
+        letters = coordinates.map do |coordinate| 
+                coordinate.split('').first.ord 
             end
             
-        numbers = spots.map do |spot|
-            spot.split('').last.to_i 
+        numbers = coordinates.map do |coordinate|
+            coordinate.split('').last.to_i 
         end
 
         if letters.uniq.count == 1 
@@ -49,9 +49,9 @@ class Board
         end
     end
 
-    def valid_placement?(ship, spots)
-        spots.sort!
-        if valid_length?(ship, spots) && consecutive_coordinates?(spots)  
+    def valid_placement?(ship, coordinates)
+        coordinates.sort!
+        if valid_length?(ship, coordinates) && consecutive_coordinates?(coordinates)  
             true
         else
             false
