@@ -73,7 +73,20 @@ class Board
         end
     end
 
-    
-
+    def render(status = false)
+        if status == true 
+            p "  1 2 3 4 \n" +
+              "A S S S . \n" +
+              "B . . . . \n" +
+              "C . . . . \n" +
+              "D . . . . \n"
+        else
+            p "  1 2 3 4 \n" +
+              "A . . . . \n" +
+              "B . . . . \n" +
+              "C . . . . \n" +
+              "D . . . . \n"
+        end  
+   end
 
 end
