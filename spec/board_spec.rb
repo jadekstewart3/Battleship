@@ -32,11 +32,22 @@ RSpec.describe Board do
         expect(@board.valid_placement?(submarine, ["A2", "A3", "A4"])).to be(false)
     end
 
+    it "accepts valid coordinates" do
+        cruiser = Ship.new("Cruiser", 3)
+        submarine = Ship.new("Submarine", 2)
+
+        expect(@board.valid_placement?(cruiser, ["A1", "A2", "A3"])).to be(true)
+        # expect(@board.valid_placement?(submarine, ["A2", "A3"])).to be(true)
+
+    end
+
     it "ship coordinates are concecutive" do
         cruiser = Ship.new("Cruiser", 3)
         submarine = Ship.new("Submarine", 2)
         
         # require "pry"; binding.pry
+
+        expect(@board.valid_placement?(submarine, ["A1", "A2"])).to be(true)
         
         expect(@board.valid_placement?(cruiser, ["A1", "A2", "A4"])).to be(false)
         

@@ -42,9 +42,9 @@ class Board
             end
 
             if letters.uniq.count == 1 # if all the letters are the same
-                numbers.each_cons(x).all? {|num1, num2, num3| num1 + 1 == num2 && num2 +1 == num3}# are the numbers concecutive?
+                numbers.each_cons(2).all? {|num1, num2| num1 + 1 == num2}# are the numbers concecutive?
             elsif numbers.uniq.count == 1 # if all the letters are the same
-                letters.each_cons(x).all? {|letter1, letter2, letter3| letter1 + 1 == letter2 && letter2 +1 == letter3 }# are the letters (converted with .ord) concecutive?
+                letters.each_cons(2).all? {|letter1, letter2| letter1 + 1 == letter2}# are the letters (converted with .ord) concecutive?
                 # JADE - I never modified line 47 to match the logic of line 45. Now that I have, it runs with a passing test :)
             else
                 false
