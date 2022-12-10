@@ -73,19 +73,37 @@ class Board
         end
     end
 
+    # def board_render
+    #     
+        
+    # end
+
+    # def empty_cells?(coordinates)
+    #     coordinates.all? do |coordinate|
+    #         @cells[coordinate].empty?
+    #     end
+    # end
+
     def render(status = false)
+        @cells.keys.each |key| do
+            
+        
+        t = @cells["A1"].render(true)
+        n = @cells["A1"].render
+        # require "pry"; binding.pry
+
         if status == true 
             p "  1 2 3 4 \n" +
-              "A S S S . \n" +
-              "B . . . . \n" +
-              "C . . . . \n" +
-              "D . . . . \n"
+              "A #{t} #{t} #{t} #{t} \n" +
+              "B #{t} #{t} #{t} #{t} \n" +
+              "C #{t} #{t} #{t} #{t} \n" +
+              "D #{t} #{t} #{t} #{t} \n"
         else
             p "  1 2 3 4 \n" +
-              "A . . . . \n" +
-              "B . . . . \n" +
-              "C . . . . \n" +
-              "D . . . . \n"
+              "A #{n} #{n} #{n} #{n} \n" +
+              "B #{n} #{n} #{n} #{n} \n" +
+              "C #{n} #{n} #{n} #{n} \n" +
+              "D #{n} #{n} #{n} #{n} \n"
         end  
    end
 
