@@ -74,18 +74,22 @@ class Board
     end
 
     def render(status = false)
-        if status == true 
+        if status == true
+            x = @cells.each_value.map {|cell| cell.render(true)}
+
             p "  1 2 3 4 \n" +
-              "A S S S . \n" +
-              "B . . . . \n" +
-              "C . . . . \n" +
-              "D . . . . \n"
+              "A #{x[0]} #{x[1]} #{x[2]} #{x[3]} \n" + 
+              "B #{x[4]} #{x[5]} #{x[6]} #{x[7]} \n" + 
+              "C #{x[8]} #{x[9]} #{x[10]} #{x[11]} \n" + 
+              "D #{x[12]} #{x[13]} #{x[14]} #{x[15]} \n"
         else
+            n = @cells.each_value.map {|cell| cell.render(false)}
+
             p "  1 2 3 4 \n" +
-              "A . . . . \n" +
-              "B . . . . \n" +
-              "C . . . . \n" +
-              "D . . . . \n"
+              "A #{n[0]} #{n[1]} #{n[2]} #{n[3]} \n" + 
+              "B #{n[4]} #{n[5]} #{n[6]} #{n[7]} \n" + 
+              "C #{n[8]} #{n[9]} #{n[10]} #{n[11]} \n" + 
+              "D #{n[12]} #{n[13]} #{n[14]} #{n[15]} \n"
         end  
    end
 

@@ -31,21 +31,21 @@ class Cell
             #non hidden display, either Ship, Hit, Miss, or Blank
             # blank, blank attacked, ship, ship attacked
 
-            if @ship.sunk?
-                "X"
-            elsif empty?
+            if empty?
                 #blank "." or blank attacked "M"
                 #perhaps add something to the fired_upon method?
                 @fired_upon ? "M" : "."
             else
                 # ship "S" or ship attacked "H"
                 @fired_upon ? "H" : "S"
+                @ship.sunk? ? "X" : "S"
             end
         else # Hidden display, does not show S
             if empty?
                 @fired_upon ? "M" : "."
             else
                 @fired_upon ? "H" : "."
+                @ship.sunk? ? "X" : "."
             end
         end
     end
