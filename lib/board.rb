@@ -66,7 +66,6 @@ class Board
 
     def place(ship, coordinates)
         if coordinates.map { |coordinate| valid_coordinate?(coordinate) && valid_placement?(ship, coordinates)}
-        # require "pry"; binding.pry
             coordinates.map do |coordinate|
                 @cells[coordinate].place_ship(ship)
             end
