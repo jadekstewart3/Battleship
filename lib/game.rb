@@ -3,7 +3,11 @@ require './lib/cell'
 require './lib/board'
 class Game
     attr_reader :player_board,
-                :comp_board
+                :comp_board,
+                :player_cruiser,
+                :player_sub,
+                :comp_sub,
+                :comp_cruiser
     def initialize
         @player_board = Board.new
         @comp_board = Board.new
@@ -25,33 +29,16 @@ class Game
         end
     end
 
-    def comp_place_cruiser
-        array_coordinates = @comp_board.cells.keys.sample(1).pop
-        x = @comp_board.cells.keys.find_index(array_coordinates)
+
+    def valid_comp_coordinates(ship)
         coordinates = []
-        coordinates << @comp_board.cells.keys[x]
-        coordinates << @comp_board.cells.keys[x+1]
-        coordinates << @comp_board.cells.keys[x+2]
-        if @comp_board.valid_placement?(@comp_cruiser, coordinates) == false || coordinates.include?(nil)
-            comp_place_cruiser
-        elsif @comp_board.valid_placement?(@comp_cruiser, coordinates) == true
-            @comp_board.place(@comp_cruiser, coordinates)
+        until @comp_board.valid_placement?(ship, coordinates)
+            coordinates = @comp_board.cells.keys.sample(ship.length) 
         end
-        comp_place_sub
+        coordinates
     end
-    def comp_place_sub
-        array_coordinates = @comp_board.cells.keys.sample(1).pop
-        x = @comp_board.cells.keys.find_index(array_coordinates)
-        coordinates = []
-        coordinates << @comp_board.cells.keys[x]
-        coordinates << @comp_board.cells.keys[x+1]
-        if @comp_board.valid_placement?(@comp_sub, coordinates) == false || coordinates.include?(nil)
-            comp_place_sub
-        elsif @comp_board.valid_placement?(@comp_sub, coordinates) == true
-            @comp_board.place(@comp_sub, coordinates)
-        end
-        run_game
-    end
+    
+    
 
    
 
