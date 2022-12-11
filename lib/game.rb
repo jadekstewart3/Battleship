@@ -22,8 +22,8 @@ class Game
         p "Enter p to play. Enter q to quit."
         user_input = gets.chomp.downcase
         if user_input == "p"
-            comp_place_cruiser
-            comp_place_sub
+            place_comp_ships
+            run_game
         else
            p "Byeeeee"
         end
@@ -37,12 +37,20 @@ class Game
         end
         coordinates
     end
-    
+
+    def place_comp_ships
+        ships = [@comp_cruiser, @comp_sub]
+        ships.each do |ship|
+            coordinates = valid_comp_coordinates(ship)
+            @comp_board.place(ship, coordinates)
+        end
+    end
     
 
    
 
     def run_game
+
       p "I have laid out my ships on the grid."
       p "You now need to lay out your two ships."
       p  "The Cruiser is three units long and the Submarine is two units long."
