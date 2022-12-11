@@ -48,8 +48,8 @@ class Game
 
     def player_input_cruiser
         input = gets.chomp.to_s.upcase.split
-        placement = @comp_board.valid_placement?(player_cruiser, input)
-        # require "pry"; binding.pry
+        placement = @player_board.valid_placement?(player_cruiser, input)
+        
         if placement == true
             @player_board.place(player_cruiser, input)
         else
@@ -58,19 +58,43 @@ class Game
         end
     end
 
+    def player_input_sub
+        input = gets.chomp.to_s.upcase.split
+        placement = @player_board.valid_placement?(player_sub, input)
+        
+        if placement == true
+            @player_board.place(player_sub, input)
+        else
+            p "-------Invalid Coordinates - Please Try Again---------"
+            player_input_sub
+        end
+    end    
+
     def run_game
-        p "I have laid out my ships on the grid."
-        p "You now need to lay out your two ships."
-        p  "The Cruiser is three units long and the Submarine is two units long."
-        p  "  1 2 3 4"
-        p  "A . . . ."
-        p  "B . . . ."
-        p  "C . . . ."
-        p  "D . . . ."
-        p  "Enter the squares for the Cruiser (3 spaces): "
-        p   ">"
+        puts "\nI have laid out my ships on the grid."
+        puts "You now need to lay out your two ships."
+        puts  "The Cruiser is three units long and the Submarine is two units long.\n"
+        puts  "  1 2 3 4"
+        puts  "A . . . ."
+        puts  "B . . . ."
+        puts  "C . . . ."
+        puts  "D . . . ."
+        puts  "Enter the squares for the Cruiser (3 spaces): "
+        puts   ">"
 
         player_input_cruiser
+
+        puts "Enter the squares for the Submarine (2 spaces):\n>"
+
+        player_input_sub
+        require "pry"; binding.pry
+        puts "This is some text"
+
+        # Displaying the boards
+        # Player choosing a coordinate to fire on
+        # Computer choosing a coordinate to fire on
+        # Reporting the result of the Player’s shot
+        # Reporting the result of the Computer’s shot
         
 
 
