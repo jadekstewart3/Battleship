@@ -26,24 +26,34 @@ class Game
     end
 
     def comp_place_cruiser
-        array_coordinates = @comp_board.cells.keys.sample(3)
-        if    @comp_board.valid_placement?(@comp_cruiser.name, array_coordinates) == true
+        array_coordinates = @comp_board.cells.keys.sample(1).pop
+        x = @comp_board.cells.keys.find_index(array_coordinates)
+        coordinates = []
+        coordinates << @comp_board.cells.keys[x]
+        coordinates << @comp_board.cells.keys[x+1]
+        coordinates << @comp_board.cells.keys[x+2]
+        if @comp_board.valid_placement?(@comp_cruiser, coordinates) == false || coordinates.include?(nil)
             comp_place_cruiser
-        elsif @comp_board.valid_placement?(@comp_cruiser.name, array_coordinates) == true
-            @comp_board.place(@comp_cruiser.name, array_array_coordinates)
+        elsif @comp_board.valid_placement?(@comp_cruiser, coordinates) == true
+            @comp_board.place(@comp_cruiser, coordinates)
         end
         comp_place_sub
-    end  
-
+    end
     def comp_place_sub
-        array_array_coordinates = @comp_board.cells.keys.sample(2)
-        if @comp_board.valid_placement?(@comp_sub.name, array_coordinates) == false
+        array_coordinates = @comp_board.cells.keys.sample(1).pop
+        x = @comp_board.cells.keys.find_index(array_coordinates)
+        coordinates = []
+        coordinates << @comp_board.cells.keys[x]
+        coordinates << @comp_board.cells.keys[x+1]
+        if @comp_board.valid_placement?(@comp_sub, coordinates) == false || coordinates.include?(nil)
             comp_place_sub
-        elsif @comp_board.valid_placement?(@comp_sub.name, array_coordinates) == true
-            @comp_board.place(@comp_sub.name, array_array_coordinates)
+        elsif @comp_board.valid_placement?(@comp_sub, coordinates) == true
+            @comp_board.place(@comp_sub, coordinates)
         end
         run_game
     end
+
+   
 
     def run_game
       p "I have laid out my ships on the grid."
