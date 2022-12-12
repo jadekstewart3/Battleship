@@ -27,25 +27,27 @@ class Cell
     end
     
     def render(status = false)
-        if status == true
-            #non hidden display, either Ship, Hit, Miss, or Blank
-            # blank, blank attacked, ship, ship attacked
-
-            if empty?
-                #blank "." or blank attacked "M"
-                #perhaps add something to the fired_upon method?
-                @fired_upon ? "M" : "."
-            else
-                # ship "S" or ship attacked "H"
-                @fired_upon ? "H" : "S"
-                @ship.sunk? ? "X" : "S"
+        if status == false
+            if @fired_upon == true && @ship == nil
+                "M"
+            elsif @fired_upon == true && @ship != nil && @ship.sunk? == false
+                "H"
+            elsif @fired_upon == true && @ship != nil && @ship.sunk? ==true
+                "X"
+            elsif @fired_upon == false
+                "."
             end
-        else # Hidden display, does not show S
-            if empty?
-                @fired_upon ? "M" : "."
-            else
-                @fired_upon ? "H" : "."
-                @ship.sunk? ? "X" : "."
+        elsif status == true
+            if @fired_upon == false && @ship != nil
+                "S"
+            elsif @fired_upon == true && @ship == nil
+                "M"
+            elsif @fired_upon == true && @ship != nil && @ship.sunk? == false
+                "H"
+            elsif @fired_upon == true && @ship != nil && @ship.sunk? == true
+                "X"
+            else @fired_upon == false && @ship == nil
+                "."
             end
         end
     end

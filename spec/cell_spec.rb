@@ -58,6 +58,6 @@ RSpec.describe Cell do
         cell2.fire_upon
 
         expect(cell2.render).to eq("H")
-        expect(cell2.render(true)).to eq("S")
+        expect(cell2.render(true)).to eq("H")
     end
 end
