@@ -87,10 +87,38 @@ class Game
         puts "Enter the squares for the Submarine (2 spaces):\n>"
 
         player_input_sub
-        require "pry"; binding.pry
-        puts "This is some text"
 
-        # Displaying the boards
+        puts "=============COMPUTER BOARD============="
+        comp_board.render(true) #remember to make this not true
+        puts "==============PLAYER BOARD=============="
+        player_board.render(true)
+
+        puts "Enter the coordinate for your shot:"
+        
+        
+        
+        puts "Enter the coordinate for your shot: \n>"
+        player_shot = gets.chomp.to_s.upcase
+        
+        valid_attack = comp_board.cells.keys.include?(player_shot) && (comp_board.cells[player_shot].fired_upon == false)
+        require "pry"; binding.pry
+        # if player_shot == valid_attack
+        # comp_board.cells["A1"].fire_upon
+        # player_board.cells.keys.sample[#call random not fired on cell].fire_upon
+        
+
+
+
+
+        
+
+        # game_over = player_cruiser.sunk? && player_sub.sunk? #stop condition for the loop
+        # until game_over
+            # puts "=============COMPUTER BOARD============="
+            # comp_board.render
+            # puts "==============PLAYER BOARD=============="
+            # player_board.render
+
         # Player choosing a coordinate to fire on
         # Computer choosing a coordinate to fire on
         # Reporting the result of the Player’s shot
