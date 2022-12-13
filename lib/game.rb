@@ -91,62 +91,70 @@ class Game
     def player_fire
         player_shot = gets.chomp.to_s.upcase
         if @comp_board.valid_coordinate?(player_shot) == false
-            puts "That isn't even in the ocean. Aim better." 
+            puts "That isn't even in the ocean. Aim better.\n" 
             player_fire
         elsif @comp_board.cells[player_shot].fired_upon? == true
-            puts "You've already fired there. Try to keep up, human."
+            puts "You've already fired there. Try to keep up, human.\n"
             player_fire
-        elsif @comp_board.cells[player_shot].fire_upon
-            if (@comp_board.cells[player_shot].fired_upon? == false) && @comp_board.cells[player_shot].empty?
-                puts "Your shot on #{player_shot} has missed!! Huzzah!!"
-            elsif (@comp_board.cells[player_shot].ship.sunk? == false) && (@comp_board.cells[player_shot].empty? == false)
-                puts "You've managed to land a hit on #{player_shot}! It seems I've underestimated you...."
-            else @comp_board.cells[player_shot].ship.sunk?
-                puts "You've sunk my #{@comp_board.cells[player_shot].ship.name}!!!!! Damn youuuuuuuuuu!!!!!"
+        else 
+            @comp_board.cells[player_shot].fire_upon
+            if @comp_board.cells[player_shot].render == "M"
+                puts "Your shot on #{player_shot} has missed!! Huzzah!!\n"
+            elsif @comp_board.cells[player_shot].render == "H"
+                puts "You've managed to land a hit on #{player_shot}! It seems I've underestimated you....\n"
+            else @comp_board.cells[player_shot].render == "X"
+                puts "You've sunk my #{@comp_board.cells[player_shot].ship.name}!!!!! Damn youuuuuuuuuu!!!!!\n"
             end
         end
     end
 
     def comp_fire
         comp_shot = @player_board.cells.keys.sample
-        until (@player_board.valid_coordinate?(comp_shot) == true) && (@player_board.cells[comp_shot].fired_upon? == false)
+        if (@player_board.valid_coordinate?(comp_shot) == false)
+            comp_fire
+        elsif @player_board.cells[comp_shot].fired_upon? == true
+            comp_fire
+        else 
             @player_board.cells[comp_shot].fire_upon
+            if @player_board.cells[comp_shot].render == "M"
+                puts "Drat! My shot on #{comp_shot} has missed! GUNMAN! YOU BAFOON! WALK THE PLANK!\n"
+            elsif @player_board.cells[comp_shot].render == "H"
+                puts "I've got you now, human!"
+            else @player_board.cells[comp_shot].render == "X"
+                puts "HAHA! I've sunk your #{@player_board.cells[comp_shot].ship.name}! Pathetic, human!\n"
+            end
         end
     end
         
-    def turn
+    def turn 
         until (player_win? == true) || (comp_win? == true)
             puts "=============COMPUTER BOARD============="
-                comp_board.render 
+                comp_board.render(true)
             puts "==============PLAYER BOARD=============="
                 player_board.render(true)
             puts "Enter the coordinate for your shot:"
             player_fire
             comp_fire
         end
-        # ships.each do |ship|
-        # coordinates = valid_comp_coordinates(ship)
-        # @comp_board.place(ship, coordinates)
-        #goal: comp selects a random cell 
-        #then: we determine if target is valid
-        #if not valid- pick new cell
-        #esif is vaild - fire
     end
-    
-    # Player choosing a coordinate to fire on
-    # Computer choosing a coordinate to fire on
-    # Reporting the result of the Player’s shot
-    # Reporting the result of the Computer’s shot
     
     def player_win?
         if (@comp_cruiser.sunk? == true) && (@comp_sub.sunk? == true)
-            puts "YOU WIN?!?!? NOOOOOOoooooooooooo........ *gurgle* *gurgle*"
+            puts "YOU WIN?!?!? NOOOOOOoooooooooooo........ *gurgle* *gurgle*\n"
+            main_menu
         end
     end
 
     def comp_win?
         if (@player_cruiser.sunk? == true) && (@player_sub.sunk? == true)
-            puts "Sleep with the fishes, human."
+            puts "Sleep with the fishes, human.\n"
+            main_menu
         end
     end
+
+    def main_menu
+        #maybe clear board and shit
+        start
+    end
+
 end
