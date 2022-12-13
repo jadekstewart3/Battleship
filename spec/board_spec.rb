@@ -108,7 +108,7 @@ RSpec.describe Board do
         expect(@board.render).to eq("  1 2 3 4 \n" + "A X X X . \n" + "B . . . . \n" + "C . . . . \n" + "D . . . . \n")
     end
 
-    it "will redner a miss" do
+    it "will render a miss" do
         cell_1 = @board.cells["A1"]
         cell_2 = @board.cells["A2"]
         cell_3 = @board.cells["A3"]

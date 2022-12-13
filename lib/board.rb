@@ -66,6 +66,7 @@ class Board
 
     def place(ship, coordinates)
         if coordinates.map { |coordinate| valid_coordinate?(coordinate) && valid_placement?(ship, coordinates)}
+        # require "pry"; binding.pry
             coordinates.map do |coordinate|
                 @cells[coordinate].place_ship(ship)
             end
@@ -76,7 +77,7 @@ class Board
         if status == true
             x = @cells.each_value.map {|cell| cell.render(true)}
 
-            puts "  1 2 3 4 \n" +
+             "  1 2 3 4 \n" +
               "A #{x[0]} #{x[1]} #{x[2]} #{x[3]} \n" + 
               "B #{x[4]} #{x[5]} #{x[6]} #{x[7]} \n" + 
               "C #{x[8]} #{x[9]} #{x[10]} #{x[11]} \n" + 
@@ -84,7 +85,7 @@ class Board
         else
             n = @cells.each_value.map {|cell| cell.render(false)}
 
-            puts "  1 2 3 4 \n" +
+             "  1 2 3 4 \n" +
               "A #{n[0]} #{n[1]} #{n[2]} #{n[3]} \n" + 
               "B #{n[4]} #{n[5]} #{n[6]} #{n[7]} \n" + 
               "C #{n[8]} #{n[9]} #{n[10]} #{n[11]} \n" + 

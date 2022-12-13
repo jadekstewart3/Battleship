@@ -30,7 +30,6 @@ class Game
         end
     end
 
-
     def valid_comp_coordinates(ship)
         coordinates = []
         until @comp_board.valid_placement?(ship, coordinates)
@@ -138,9 +137,9 @@ class Game
     def turn 
         until (player_win? == true) || (comp_win? == true)
             puts "=============COMPUTER BOARD============="
-                comp_board.render
+                puts comp_board.render
             puts "==============PLAYER BOARD=============="
-                player_board.render(true)
+                puts player_board.render(true)
             puts "Enter the coordinate for your shot:"
             player_fire
             comp_fire
