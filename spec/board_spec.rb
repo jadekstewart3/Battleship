@@ -36,6 +36,7 @@ RSpec.describe Board do
     it "verifies valid length of ship to coordinates" do
         cruiser = Ship.new("Cruiser", 3)
         submarine = Ship.new("Submarine", 2)
+
         expect(@board.valid_length?(submarine, ["A1", "A2"])).to be(true)
         expect(@board.valid_length?(submarine, ["A1", "A2", "A3"])).to be(false)
     end
@@ -43,9 +44,6 @@ RSpec.describe Board do
     it "ship coordinates are consecutive" do
         cruiser = Ship.new("Cruiser", 3)
         submarine = Ship.new("Submarine", 2)
-        
-        # require "pry"; binding.pry
-
 
         expect(@board.consecutive_coordinates?(["A1", "A2"])).to be(true)
         expect(@board.consecutive_coordinates?(["A1", "B2", "C3"])).to be(false)
@@ -71,6 +69,7 @@ RSpec.describe Board do
         cell_1 = @board.cells["A1"]
         cell_2 = @board.cells["A2"]
         cell_3 = @board.cells["A3"]
+
         expect(cell_1.ship).to eq(cruiser)
         expect(cell_2.ship).to eq(cruiser)
         expect(cell_3.ship).to eq(cruiser)
@@ -80,16 +79,15 @@ RSpec.describe Board do
     it "can not have overlapping ships" do
         cruiser = Ship.new("Cruiser", 3)
         @board.place(cruiser, ["A1", "A2", "A3"])
-
-        
         submarine = Ship.new("Submarine", 2)
-        # require "pry"; binding.pry
+
         expect(@board.valid_placement?(submarine, ["A1", "B1"])).to eq(false)
     end
 
     it "renders a board" do
         cruiser = Ship.new("Cruiser", 3)
         @board.place(cruiser, ["A1", "A2", "A3"])
+        
         expect(@board.render).to eq("  1 2 3 4 \n" + "A . . . . \n" + "B . . . . \n" + "C . . . . \n" + "D . . . . \n")
         expect(@board.render(true)).to eq("  1 2 3 4 \n" + "A S S S . \n" + "B . . . . \n" + "C . . . . \n" + "D . . . . \n")
    end

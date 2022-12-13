@@ -25,7 +25,8 @@ class Game
             place_comp_ships
             run_game
         else
-           p "Byeeeee"
+           p "Byeeeee" 
+            exit!
         end
     end
 
@@ -91,19 +92,24 @@ class Game
     def player_fire
         player_shot = gets.chomp.to_s.upcase
         if @comp_board.valid_coordinate?(player_shot) == false
-            puts "That isn't even in the ocean. Aim better.\n" 
+            puts "That isn't even in the ocean. Aim better.\n"
+            puts "---------------"
             player_fire
         elsif @comp_board.cells[player_shot].fired_upon? == true
             puts "You've already fired there. Try to keep up, human.\n"
+            puts "--------------"
             player_fire
         else 
             @comp_board.cells[player_shot].fire_upon
             if @comp_board.cells[player_shot].render == "M"
                 puts "Your shot on #{player_shot} has missed!! Huzzah!!\n"
+                puts "---------------"
             elsif @comp_board.cells[player_shot].render == "H"
                 puts "You've managed to land a hit on #{player_shot}! It seems I've underestimated you....\n"
+                puts "---------------"
             else @comp_board.cells[player_shot].render == "X"
                 puts "You've sunk my #{@comp_board.cells[player_shot].ship.name}!!!!! Damn youuuuuuuuuu!!!!!\n"
+                puts "---------------"
             end
         end
     end
@@ -118,10 +124,13 @@ class Game
             @player_board.cells[comp_shot].fire_upon
             if @player_board.cells[comp_shot].render == "M"
                 puts "Drat! My shot on #{comp_shot} has missed! GUNMAN! YOU BAFOON! WALK THE PLANK!\n"
+                puts "---------------"
             elsif @player_board.cells[comp_shot].render == "H"
                 puts "I've got you now, human!"
+                puts "---------------"
             else @player_board.cells[comp_shot].render == "X"
                 puts "HAHA! I've sunk your #{@player_board.cells[comp_shot].ship.name}! Pathetic, human!\n"
+                puts "---------------"
             end
         end
     end
@@ -129,7 +138,7 @@ class Game
     def turn 
         until (player_win? == true) || (comp_win? == true)
             puts "=============COMPUTER BOARD============="
-                comp_board.render(true)
+                comp_board.render
             puts "==============PLAYER BOARD=============="
                 player_board.render(true)
             puts "Enter the coordinate for your shot:"
@@ -153,7 +162,6 @@ class Game
     end
 
     def main_menu
-        #maybe clear board and shit
         start
     end
 
